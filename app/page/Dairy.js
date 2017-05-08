@@ -3,7 +3,6 @@
  */
 import { Component } from 'react'
 import { Link } from 'react-router'
-
 class Dairy extends Component {
 	constructor(props) {
 		super(props);
@@ -25,7 +24,7 @@ class Dairy extends Component {
 
 									<h1>
 										<div className="ui transparent input">
-											<input type="text" style={{width:'100%', textAlign: 'center', color: 'white' }} placeholder="请输入标题" />
+											<input type="text" style={{ width: '100%', textAlign: 'center', color: 'white' }} placeholder="请输入标题" />
 										</div>
 									</h1>
 									<span className="subheading">
@@ -38,29 +37,35 @@ class Dairy extends Component {
 						</div>
 					</div>
 				</header>
-				<div style={{ textAlign: 'center', paddingTop: '10px' }}>
-					<i className="photo icon"></i>
-					<i className="header icon"></i>
-					<i className="bold icon" onClick={this.bold}></i>
-					<i className="paragraph icon"></i>
-					<i className="unlinkify icon"></i>
-					<i className="save icon" ></i>
+				<div id="div1" style={{ width: '100%', height: '500px' }}>
+					<p>请输入正文</p>
 				</div>
 
-				<div className="dairy-content " id='content'
-					style={{
-						height: " 500px", fontSize: "14px",
-						marginLeft: " auto", marginRight: " auto"
-					}}>
+				{
+					// <div style={{ textAlign: 'center', paddingTop: '10px' }}>
+					// 	<i className="photo icon"></i>
+					// 	<i className="header icon"></i>
+					// 	<i className="bold icon" onClick={this.bold}></i>
+					// 	<i className="paragraph icon"></i>
+					// 	<i className="unlinkify icon"></i>
+					// 	<i className="save icon" ></i>
+					// </div>
 
-					<textarea id="msg" type="text" placeholder="请输入正文"
-						style={{
-							width: "100%", height: " 100px", outline: " 0px", border: "none", fontSize: "14px",
-							backgroundColor: "transparent", color: "rgb(0, 0, 0)", wordBreak: "break-all", paddingTop: '10px'
-						}}></textarea>
+					// <div className="dairy-content " id='content'
+					// 	style={{
+					// 		height: " 500px", fontSize: "14px",
+					// 		marginLeft: " auto", marginRight: " auto"
+					// 	}}>
+
+					// 	<textarea id="msg" type="text" placeholder="请输入正文"
+					// 		style={{
+					// 			width: "100%", height: " 100px", outline: " 0px", border: "none", fontSize: "14px",
+					// 			backgroundColor: "transparent", color: "rgb(0, 0, 0)", wordBreak: "break-all", paddingTop: '10px'
+					// 		}}></textarea>
 
 
-				</div>
+					// </div>
+				}
 			</div>
 		);
 	}
@@ -75,14 +80,34 @@ class Dairy extends Component {
 			// 	num:this.state.num++
 			// })
 			// console.log(1134)
-			
+
 		}
 	}
 
 	componentDidMount() {
 		let that = this;
 
+		$(function () {
+			var editor = new wangEditor('div1');
+			// 上传图片（举例）
+			editor.config.uploadImgUrl = '/dairy';
 
+			// 配置自定义参数（举例）
+			editor.config.uploadParams = {
+				// token: 'abcdefg',
+				// user: 'wangfupeng1988'
+			};
+
+			// 设置 headers（举例）
+			editor.config.uploadHeaders = {
+				// 'Accept': 'text/x-json'
+			};
+
+			// 隐藏掉插入网络图片功能。该配置，只有在你正确配置了图片上传功能之后才可用。
+			// editor.config.hideLinkImg = true;
+
+			editor.create();
+		});
 	}
 }
 

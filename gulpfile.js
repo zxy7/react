@@ -80,7 +80,7 @@ function bundleDist() {
 /*		.transform(shim)*/
 		.bundle()
 		.on('error', gutil.log)
-		.pipe(source('bundle.wx.min.js'))
+		.pipe(source('bundle.min.js'))
 		.pipe(buffer())
 		.pipe(uglify())
 		.pipe(gulp.dest('./assets/'));
