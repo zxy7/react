@@ -26,6 +26,11 @@ module.exports = {
                 pathRewrite: { '^/': '/' },
                 changeOrigin: true
             },
+            '/getdairys': {
+                target: 'http://127.0.0.1:3001',
+                pathRewrite: { '^/': '/' },
+                changeOrigin: true
+            },
             '/test': {
                 target: 'http://127.0.0.1:3001',
                 pathRewrite: { '^/': '/' },

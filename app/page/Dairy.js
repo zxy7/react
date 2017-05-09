@@ -99,10 +99,6 @@ class Dairy extends Component {
 			h1: this.state.h1,
 			h2: this.state.h2,
 		};
-		// // 通过JQuery 发送POST请求，内容是data
-		// $.post("http://127.0.0.1:3000/savedairy", data, function (data, status) {
-		// 	alert("Data: " + data + "\nStatus: " + status);
-		// });
 		$.ajax({
 			type: "get",
 			url: "/test",
@@ -112,7 +108,9 @@ class Dairy extends Component {
 			success: (res) => {
 				if (res.success){
 					console.log('请求成功！！！',res.msg)
+					
 				}
+				console.log(res)
 			}
 		})
 		$.ajax({
@@ -124,7 +122,7 @@ class Dairy extends Component {
 			crossDomain: true,
 			dataType: "json",
 			success: (res) => {
-				T.alert(res.msg);
+				// T.alert(res.msg);
 				// location.href = "#/myincome/";
 			}
 		});

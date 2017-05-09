@@ -37,7 +37,7 @@ class Index extends Component {
 						</div>
 					</div>
 				</header>
-				<div className="container" style={{padding:'16px'}}>
+				<div className="container" style={{ padding: '16px' }}>
 					<div className="row">
 						<div className="  col-lg-8 col-lg-offset-1		col-md-8 col-md-offset-1	col-sm-12 col-xs-12 	postlist-container  ">
 							<PostItem />
@@ -100,8 +100,20 @@ class Index extends Component {
 
 	componentDidMount() {
 		let that = this;
+		// $.ajax({
+		// 	type: "get",
+		// 	dataType: "json",
+		// 	url: '/getdairys',
+		// 	xhrFields: { withCredentials: true },
+		// 	crossDomain: true,
+		// 	success: function (res) {
+		// 		console.log(res)
+		// 		// if (res.success) {
+		// 		// 	console.log('请求成功！！！', res.msg)
+		// 		// }
+		// 	}
+		// })
 
-		
 	}
 }
 

@@ -10,74 +10,93 @@ var multer = require('multer');
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(multer({ dest: '/tmp/' }).array('image'));
-
-// bodyParser.json解析json数据格式的
-
-
-/*app.get('/savedairy', function (req, res) {
-    console.log('这里被请求了！！！');
-    res.send({success: true,
-    msg: 'goodnews!'});
+var mysql = require('mysql');
+var connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '123456',
+    database: 'test'
 });
+// bodyParser.json解析json数据格式的
+app.use(bodyParser.json());
+
+
+app.get('/getdairys', function (req, res) {
+    var result = {
+        success: true,
+        msg: 'save good message',
+        data: ''
+    };
+    res.send(result)
+})
+
+// 这是一个此时用例
+// connection.connect();
+// var sql = 'SELECT * FROM dairys';
+// //查
+// connection.query(sql, function (err, result) {
+//     if (err) {
+//         console.log('[SELECT ERROR] - ', err.message);
+//         return;
+//     }
+//     // res.send(JSON.parse(result))
+//     app.get('/test', function (req, res) {
+//         res.send(result)
+//     })
+//     console.log('--------------------------SELECT----------------------------');
+//     // console.log(result);
+//     console.log('------------------------------------------------------------\n\n');
+// });
+
+// connection.end();
+app.get('/test', function (req, res) {
+    var result = {
+        success: true,
+        msg: 'save good message',
+        data: ''
+    };
+    res.send(result)
+})
 
 app.post('/savedairy', function (req, res) {
 
-    console.log("保存kaishi ");
-    // 对象转换为字符串
+    console.log('+++++++++++++++', req.body);  // 上传的文件信息
     var str_json = JSON.stringify(req.body);
+
+
+    connection.connect();
+
+    console.log(req.body.h1)
+
+    var addSql = 'INSERT INTO dairys(Id,h1,h2,content,date,tag) VALUES(0,?,?,?,?,?)';
+    var addSqlParams = [req.body.h1, req.body.h2, '23453', new Date(), 'CN'];
+    //增
+    connection.query(addSql, addSqlParams, function (err, result) {
+        if (err) {
+            console.log('[INSERT ERROR] - ', err.message);
+            return;
+        }
+
+        console.log('--------------------------INSERT----------------------------');
+        //console.log('INSERT ID:',result.insertId);        
+        console.log('INSERT ID:', result);
+        console.log('-----------------------------------------------------------------\n\n');
+    });
+
+    connection.end();
+
 
     fs.writeFile('graph.json', str_json, 'utf8', function () {
         // 保存完成后的回调函数
         console.log("保存完成");
     });
 
-});
+})
 
-app.listen(3001,function(){
-    console.log('监听端口：3001');
-});*/
+var server = app.listen(3001, function () {
 
- app.get('/savedairy', function (req, res) {
-    res.sendFile( __dirname + "/" + "index-wx.html" );
- })
- 
- // 这是一个此时用例
- app.get('/test', function(req, res) {
-     var result = {
-         success: true,
-         msg: 'show good message',
-         data: ''
-     };
-     res.send(result)
- })
+    var host = server.address().address
+    var port = server.address().port
 
- app.use(bodyParser.json());
- app.post('/savedairy', function (req, res) {
-
-    console.log('+++++++++++++++',req.body);  // 上传的文件信息
-
-    var des_file = __dirname + "/" + req.body.h1;
-    fs.readFile(req.body, function (err, data) {
-         fs.writeFile(des_file, data, function (err) {
-          if( err ){
-               console.log( err );
-          }else{
-                response = {
-                    message:'File uploaded successfully', 
-                    filename:req.body.h1
-               };
-           }
-           console.log( response );
-           res.end( JSON.stringify( response ) );
-        });
-    });
- })
-
- var server = app.listen(3001, function () {
-
-   var host = server.address().address
-   var port = server.address().port
-
-   console.log("应用实例，访问地址为 http://%s:%s", host, port)
-
- })
+    console.log("应用实例，访问地址为 http://%s:%s", host, port)
+})
