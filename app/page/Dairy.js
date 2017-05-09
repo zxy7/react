@@ -6,9 +6,12 @@ import { Link } from 'react-router'
 class Dairy extends Component {
 	constructor(props) {
 		super(props);
-		this.bold = this.bold.bind(this);
+		this.save = this.save.bind(this);
+		this.defaultChange = this.defaultChange.bind(this);
 		this.state = {
 			num: 0,
+			h1: '',
+			h2: '',
 		};
 	}
 
@@ -24,12 +27,24 @@ class Dairy extends Component {
 
 									<h1>
 										<div className="ui transparent input">
-											<input type="text" style={{ width: '100%', textAlign: 'center', color: 'white' }} placeholder="请输入标题" />
+											<input type="text"
+												ref="h1"
+												data-name="h1"
+												value={this.state.h1}
+												onChange={this.defaultChange}
+												style={{ width: '100%', textAlign: 'center', color: 'white' }}
+												placeholder="请输入标题" />
 										</div>
 									</h1>
 									<span className="subheading">
 										<div className="ui transparent input">
-											<input type="text" style={{ textAlign: 'center', color: 'white' }} placeholder="please enter the title " />
+											<input type="text"
+												ref="h2"
+												data-name="h2"
+												value={this.state.h2}
+												onChange={this.defaultChange}
+												style={{ textAlign: 'center', color: 'white' }}
+												placeholder="please enter the title " />
 										</div>
 									</span>
 								</div>
@@ -37,6 +52,7 @@ class Dairy extends Component {
 						</div>
 					</div>
 				</header>
+				<i className="save icon" style={{ width: 40, height: 40, lineHeight: '40px' }} onClick={this.save}></i>
 				<div id="div1" style={{ width: '100%', height: '500px' }}>
 					<p>请输入正文</p>
 				</div>
@@ -69,20 +85,57 @@ class Dairy extends Component {
 			</div>
 		);
 	}
-	bold() {
-		$('.bold.icon').toggleClass('icon-active');
-		if ($('.bold.icon').hasClass('icon-active')) {
-			// console.log(113)
-			// var str = '<input style="font-weight:bold" type="text" id = "num_' + this.state.num + '">';
-			// $('#content').append(str);
-			// $('#num_' + this.state.num).focus();
-			// this.setState({
-			// 	num:this.state.num++
-			// })
-			// console.log(1134)
-
-		}
+	defaultChange(event) {
+		this.setState(
+			function (ob) {
+				ob[$(event.target).data('name')] = event.target.value;
+				return ob;
+			}({})
+		);
 	}
+
+	save() {
+		let data = {
+			h1: this.state.h1,
+			h2: this.state.h2,
+		};
+		// // 通过JQuery 发送POST请求，内容是data
+		// $.post("http://127.0.0.1:3000/savedairy", data, function (data, status) {
+		// 	alert("Data: " + data + "\nStatus: " + status);
+		// });
+		$.ajax({
+			type: "post",
+			url: 'http://127.0.0.1:3000/savedairy',
+			contentType: "text/html;charset=UTF-8",
+			on: 'now',
+			data: JSON.stringify(data),
+			// xhrFields: { withCredentials: true },
+			// crossDomain: true,
+			dataType: "json",
+			success: (res) => {
+				T.alert(res.msg);
+				// location.href = "#/myincome/";
+			}
+		});
+		console.log(data);
+
+
+
+	}
+	// bold() {
+	// 	$('.bold.icon').toggleClass('icon-active');
+	// 	if ($('.bold.icon').hasClass('icon-active')) {
+	// 		// console.log(113)
+	// 		// var str = '<input style="font-weight:bold" type="text" id = "num_' + this.state.num + '">';
+	// 		// $('#content').append(str);
+	// 		// $('#num_' + this.state.num).focus();
+	// 		// this.setState({
+	// 		// 	num:this.state.num++
+	// 		// })
+	// 		// console.log(1134)
+
+	// 	}
+	// }
 
 	componentDidMount() {
 		let that = this;

@@ -8,6 +8,8 @@ var fs = require('fs');
 var url = require('url');
 var path = require('path');
 
+var mysql = require('mysql');
+
 // 文件将要上传到哪个文件夹下面
 var uploadfoldername = 'uploadfiles';
 var uploadfolderpath = path.join(__dirname, uploadfoldername);
@@ -16,6 +18,20 @@ var uploadfolderpath = path.join(__dirname, uploadfoldername);
 // var server = '172.22.145.3';
 var server = 'localhost';
 var port = 3000;
+
+// var connection = mysql.createConnection({
+// 	host: 'localhost',
+// 	user: 'root',
+// 	password: '123456',
+// 	port: '3000',
+// 	database: 'test',
+// });
+// connection.connect();
+// connection.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
+// 	if (error) throw error;
+// 	console.log('The solution is: ', results[0].solution);
+// });
+// connection.end();
 
 http.createServer(function (req, res) {
 
@@ -63,8 +79,8 @@ http.createServer(function (req, res) {
 				// 获取文件名，并根据文件名获取扩展名
 				var filename = file.name;
 				var extname = filename.lastIndexOf('.') >= 0
-								? filename.slice(filename.lastIndexOf('.') - filename.length)
-								: '';
+					? filename.slice(filename.lastIndexOf('.') - filename.length)
+					: '';
 				// 文件名没有扩展名时候，则从文件类型中取扩展名
 				if (extname === '' && type.indexOf('/') >= 0) {
 					extname = '.' + type.split('/')[1];
@@ -90,7 +106,7 @@ http.createServer(function (req, res) {
 						// 拼接图片url地址
 						result = 'http://' + server + ':' + port + '/' + uploadfoldername + '/' + filename;
 					}
-					
+
 					// 返回结果
 					res.writeHead(200, {
 						'Content-type': 'text/html'
@@ -112,7 +128,7 @@ http.createServer(function (req, res) {
 			}
 			if (filepath.slice(filepath.lastIndexOf('.') - filepath.length) === '.css') {
 				// 兼容IE
-				res.writeHead('200', {'Content-type': 'text/css'});
+				res.writeHead('200', { 'Content-type': 'text/css' });
 			} else {
 				res.writeHead('200');
 			}

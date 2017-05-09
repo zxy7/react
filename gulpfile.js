@@ -62,11 +62,11 @@ function bundle() {
 		.pipe(sourcemaps.write('./')) // 写入 .map 文件
 		.pipe(gulp.dest('./assets/'));
 
-	gulp.src(cssSrc)
-		.pipe(cssmin())
-		.pipe(concat('bundle.css'))
-		.pipe(rename({suffix: '.min'}))
-		.pipe(gulp.dest('./assets/'));
+	// gulp.src(cssSrc)
+	// 	.pipe(cssmin())
+	// 	.pipe(concat('bundle.css'))
+	// 	.pipe(rename({suffix: '.min'}))
+	// 	.pipe(gulp.dest('./assets/'));
 }
 //将代码进行压缩，主要用于生产环境下
 function bundleDist() {
@@ -80,7 +80,7 @@ function bundleDist() {
 /*		.transform(shim)*/
 		.bundle()
 		.on('error', gutil.log)
-		.pipe(source('bundle.min.js'))
+		.pipe(source('bundle.wx.min.js'))
 		.pipe(buffer())
 		.pipe(uglify())
 		.pipe(gulp.dest('./assets/'));

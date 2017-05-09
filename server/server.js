@@ -1,35 +1,63 @@
-var http = require('http');
-var fs = require('fs');
-var url = require('url');
+// <pre>
+var express = require('express');
+var app = express();
+var fs = require("fs");
+ 
+var bodyParser = require('body-parser');
 
+var multer  = require('multer');
+ 
+app.use(express.static('public'));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(multer({ dest: '/tmp/'}).array('image'));
+ 
+// bodyParser.json解析json数据格式的
+app.use(bodyParser.json());
+ 
+app.post('/savedairy',function(req, res){
+ 
+    // 对象转换为字符串
+    var str_json = JSON.stringify(req.body);    
+ 
+    fs.writeFile('graph.json', str_json, 'utf8', function(){
+        // 保存完成后的回调函数
+        console.log("保存完成");
+    });
+ 
+});
+ 
+app.listen(3000);
 
-// 创建服务器
-http.createServer( function (request, response) {  
-   // 解析请求，包括文件名
-   var pathname = url.parse(request.url).pathname;
-   
-   // 输出请求的文件名
-   console.log("Request for " + pathname + " received.");
-   
-   // 从文件系统中读取请求的文件内容
-   fs.readFile(pathname.substr(1), function (err, data) {
-      if (err) {
-         console.log(err);
-         // HTTP 状态码: 404 : NOT FOUND
-         // Content Type: text/plain
-         response.writeHead(404, {'Content-Type': 'text/html'});
-      }else{	         
-         // HTTP 状态码: 200 : OK
-         // Content Type: text/plain
-         response.writeHead(200, {'Content-Type': 'text/html'});	
-         
-         // 响应文件内容
-         response.write(data.toString());		
-      }
-      //  发送响应数据
-      response.end();
-   });   
-}).listen(3000);
-
-// 控制台会输出以下信息
-console.log('Server running at http://127.0.0.1:3000/');
+// app.get('/index-wx.html', function (req, res) {
+//    res.sendFile( __dirname + "/" + "index-wx.html" );
+// })
+ 
+// app.post('/file_upload', function (req, res) {
+ 
+//    console.log(req.data);  // 上传的文件信息
+ 
+//    var des_file = __dirname + "/" + req.data.h1;
+//    fs.readFile(req.data, function (err, data) {
+//         fs.writeFile(des_file, data, function (err) {
+//          if( err ){
+//               console.log( err );
+//          }else{
+//                response = {
+//                    message:'File uploaded successfully', 
+//                    filename:req.req.data.h1
+//               };
+//           }
+//           console.log( response );
+//           res.end( JSON.stringify( response ) );
+//        });
+//    });
+// })
+ 
+// var server = app.listen(3000, function () {
+ 
+//   var host = server.address().address
+//   var port = server.address().port
+ 
+//   console.log("应用实例，访问地址为 http://%s:%s", host, port)
+ 
+// })
