@@ -21,8 +21,8 @@ module.exports = {
         inline: true,
         stats: { colors: true },
         proxy: {
-              '/demeter/wxres/*': {
-                target: 'http://123.57.207.196:8080',
+              '/savedairy': {
+                target: 'http://localhost:3001',
                 pathRewrite: { '^/': '/' },
                 changeOrigin: true
             },
