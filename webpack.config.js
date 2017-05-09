@@ -21,12 +21,17 @@ module.exports = {
         inline: true,
         stats: { colors: true },
         proxy: {
-              '/savedairy': {
-                target: 'http://localhost:3001',
+            '/savedairy': {
+                target: 'http://127.0.0.1:3001',
                 pathRewrite: { '^/': '/' },
                 changeOrigin: true
             },
-           
+            '/test': {
+                target: 'http://127.0.0.1:3001',
+                pathRewrite: { '^/': '/' },
+                changeOrigin: true
+            },
+
         }
     },
     module: {

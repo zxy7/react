@@ -104,13 +104,24 @@ class Dairy extends Component {
 		// 	alert("Data: " + data + "\nStatus: " + status);
 		// });
 		$.ajax({
+			type: "get",
+			url: "/test",
+			on: "now",
+			xhrFields: { withCredentials: true },
+			crossDomain: true,
+			success: (res) => {
+				if (res.success){
+					console.log('请求成功！！！',res.msg)
+				}
+			}
+		})
+		$.ajax({
 			type: "post",
-			url: 'http://127.0.0.1:3000/savedairy',
-			contentType: "text/html;charset=UTF-8",
+			url: '/savedairy',
 			on: 'now',
-			data: JSON.stringify(data),
-			// xhrFields: { withCredentials: true },
-			// crossDomain: true,
+			data: data,
+			xhrFields: { withCredentials: true },
+			crossDomain: true,
 			dataType: "json",
 			success: (res) => {
 				T.alert(res.msg);
