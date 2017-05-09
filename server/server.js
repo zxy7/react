@@ -12,11 +12,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(multer({ dest: '/tmp/' }).array('image'));
 
 // bodyParser.json解析json数据格式的
-app.use(bodyParser.json());
 
-app.get('/savedairy', function (req, res) {
-    res.render("res", { });
+
+/*app.get('/savedairy', function (req, res) {
+    console.log('这里被请求了！！！');
+    res.send({success: true,
+    msg: 'goodnews!'});
 });
+
 app.post('/savedairy', function (req, res) {
 
     console.log("保存kaishi ");
@@ -30,38 +33,51 @@ app.post('/savedairy', function (req, res) {
 
 });
 
-app.listen(3001);
+app.listen(3001,function(){
+    console.log('监听端口：3001');
+});*/
 
-// app.get('/savedairy', function (req, res) {
-//    res.sendFile( __dirname + "/" + "index-wx.html" );
-// })
+ app.get('/savedairy', function (req, res) {
+    res.sendFile( __dirname + "/" + "index-wx.html" );
+ })
+ 
+ // 这是一个此时用例
+ app.get('/test', function(req, res) {
+     var result = {
+         success: true,
+         msg: 'show good message',
+         data: ''
+     };
+     res.send(result)
+ })
 
-// app.post('/savedairy', function (req, res) {
+ app.use(bodyParser.json());
+ app.post('/savedairy', function (req, res) {
 
-//    console.log(req.data);  // 上传的文件信息
+    console.log('+++++++++++++++',req.body);  // 上传的文件信息
 
-//    var des_file = __dirname + "/" + req.data.h1;
-//    fs.readFile(req.data, function (err, data) {
-//         fs.writeFile(des_file, data, function (err) {
-//          if( err ){
-//               console.log( err );
-//          }else{
-//                response = {
-//                    message:'File uploaded successfully', 
-//                    filename:req.req.data.h1
-//               };
-//           }
-//           console.log( response );
-//           res.end( JSON.stringify( response ) );
-//        });
-//    });
-// })
+    var des_file = __dirname + "/" + req.body.h1;
+    fs.readFile(req.body, function (err, data) {
+         fs.writeFile(des_file, data, function (err) {
+          if( err ){
+               console.log( err );
+          }else{
+                response = {
+                    message:'File uploaded successfully', 
+                    filename:req.body.h1
+               };
+           }
+           console.log( response );
+           res.end( JSON.stringify( response ) );
+        });
+    });
+ })
 
-// var server = app.listen(3000, function () {
+ var server = app.listen(3001, function () {
 
-//   var host = server.address().address
-//   var port = server.address().port
+   var host = server.address().address
+   var port = server.address().port
 
-//   console.log("应用实例，访问地址为 http://%s:%s", host, port)
+   console.log("应用实例，访问地址为 http://%s:%s", host, port)
 
-// })
+ })
