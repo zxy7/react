@@ -13,6 +13,9 @@ class Index extends Component {
 		this.handleClick2 = this.handleClick2.bind(this);
 		this.state = {
 			count: 0,
+			posts: [],
+			// posts: [{ "id": 1, "h1": "大标题", "h2": "小标题", "filename": "规划好好纠结军军军军军或或过过过过", "date": "2017-05-08T07:32:22.000Z", "tag": "today" }, { "id": 2, "h1": "hahahah", "h2": "小标题", "filename": "规划好好纠结军军军军军或或过过过过", "date": "2017-05-02T07:32:22.000Z", "tag": "hh" }, { "id": 3, "h1": "淘宝", "h2": "ht", "filename": "13", "date": "2017-05-03T07:43:54.000Z", "tag": "77" }, { "id": 4, "h1": "看看", "h2": "看看", "filename": "可口可乐", "date": "2017-05-11T07:44:50.000Z", "tag": "923" }, { "id": 5, "h1": "d s", "h2": "d ", "filename": "d ", "date": "2017-05-07T07:45:13.000Z", "tag": "淘宝" }, { "id": 6, "h1": "bigtitle", "h2": "smalltitle", "filename": "23453", "date": "2017-05-08T07:32:22.000Z", "tag": "CN" }, { "id": 7, "h1": "上看看", "h2": "就几节课", "filename": "23453", "date": "2017-05-08T07:32:22.000Z", "tag": "CN" }, { "id": 16, "h1": "", "h2": "", "filename": "23453", "date": "2017-05-10T06:56:07.000Z", "tag": "CN" }],
+
 		};
 	}
 
@@ -41,6 +44,29 @@ class Index extends Component {
 					<div className="row">
 						<div className="  col-lg-8 col-lg-offset-1		col-md-8 col-md-offset-1	col-sm-12 col-xs-12 	postlist-container  ">
 							<PostItem />
+							{
+								this.state.posts ? this.state.posts.map((item, index) => {
+									return <div className="post-preview" key={index}>
+										<a href="/dairyinf" onClick={location.href="#/dairyinf"}>
+											<h2 className="post-title">
+												{item.h1}
+											</h2>
+											<h3 className="post-subtitle">
+												{item.h2}
+											</h3>
+											<div className="post-content-preview">
+												{item.filename}
+											</div>
+										</a>
+										<p className="post-meta">
+											Posted by Zxy on {item.date}
+										</p>
+									</div>
+								}
+								) : ''
+							}
+
+
 							<hr />
 							<ul className="pager">
 								<li className="next">
@@ -100,19 +126,22 @@ class Index extends Component {
 
 	componentDidMount() {
 		let that = this;
-		// $.ajax({
-		// 	type: "get",
-		// 	dataType: "json",
-		// 	url: '/getdairys',
-		// 	xhrFields: { withCredentials: true },
-		// 	crossDomain: true,
-		// 	success: function (res) {
-		// 		console.log(res)
-		// 		// if (res.success) {
-		// 		// 	console.log('请求成功！！！', res.msg)
-		// 		// }
-		// 	}
-		// })
+		$.ajax({
+			type: "get",
+			dataType: "json",
+			url: '/getdairys',
+			xhrFields: { withCredentials: true },
+			crossDomain: true,
+			success: function (res) {
+				console.log(res)
+				that.setState({
+					posts:res
+				})
+				// if (res.success) {
+				// 	console.log('请求成功！！！', res.msg)
+				// }
+			}
+		})
 
 	}
 }

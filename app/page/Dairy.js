@@ -99,20 +99,20 @@ class Dairy extends Component {
 			h1: this.state.h1,
 			h2: this.state.h2,
 		};
-		$.ajax({
-			type: "get",
-			url: "/test",
-			on: "now",
-			xhrFields: { withCredentials: true },
-			crossDomain: true,
-			success: (res) => {
-				if (res.success){
-					console.log('请求成功！！！',res.msg)
+		// $.ajax({
+		// 	type: "get",
+		// 	url: "/test",
+		// 	on: "now",
+		// 	xhrFields: { withCredentials: true },
+		// 	crossDomain: true,
+		// 	success: (res) => {
+		// 		// if (res.success){
+		// 			console.log('请求成功！！！',res)
 					
-				}
-				console.log(res)
-			}
-		})
+		// 		// }
+		// 		console.log(res)
+		// 	}
+		// })
 		$.ajax({
 			type: "post",
 			url: '/savedairy',

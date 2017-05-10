@@ -22,42 +22,46 @@ app.use(bodyParser.json());
 
 
 app.get('/getdairys', function (req, res) {
-    var result = {
-        success: true,
-        msg: 'save good message',
-        data: ''
-    };
-    res.send(result)
+     connection.connect();
+    var sql = 'SELECT * FROM dairys';
+    //查
+
+    connection.query(sql, function (err, result) {
+        // if (err) {
+        //     console.log('[SELECT ERROR] - ', err.message);
+        //     return;
+        // }
+        // res.send(JSON.parse(result))
+        res.send(result)
+        console.log('--------------------------SELECT----------------------------');
+        // console.log(result);
+        console.log('------------------------------------------------------------\n\n');
+    });
+
+    // connection.end();
 })
 
 // 这是一个此时用例
-// connection.connect();
-// var sql = 'SELECT * FROM dairys';
-// //查
-// connection.query(sql, function (err, result) {
-//     if (err) {
-//         console.log('[SELECT ERROR] - ', err.message);
-//         return;
-//     }
-//     // res.send(JSON.parse(result))
-//     app.get('/test', function (req, res) {
+
+// app.get('/test', function (req, res) {
+//     connection.connect();
+//     var sql = 'SELECT * FROM dairys';
+//     //查
+
+//     connection.query(sql, function (err, result) {
+//         if (err) {
+//             console.log('[SELECT ERROR] - ', err.message);
+//             return;
+//         }
+//         // res.send(JSON.parse(result))
 //         res.send(result)
-//     })
-//     console.log('--------------------------SELECT----------------------------');
-//     // console.log(result);
-//     console.log('------------------------------------------------------------\n\n');
-// });
+//         console.log('--------------------------SELECT----------------------------');
+//         // console.log(result);
+//         console.log('------------------------------------------------------------\n\n');
+//     });
 
-// connection.end();
-app.get('/test', function (req, res) {
-    var result = {
-        success: true,
-        msg: 'save good message',
-        data: ''
-    };
-    res.send(result)
-})
-
+//     connection.end();
+// })
 app.post('/savedairy', function (req, res) {
 
     console.log('+++++++++++++++', req.body);  // 上传的文件信息
@@ -68,7 +72,7 @@ app.post('/savedairy', function (req, res) {
 
     console.log(req.body.h1)
 
-    var addSql = 'INSERT INTO dairys(Id,h1,h2,content,date,tag) VALUES(0,?,?,?,?,?)';
+    var addSql = 'INSERT INTO dairys(Id,h1,h2,filename,date,tag) VALUES(0,?,?,?,?,?)';
     var addSqlParams = [req.body.h1, req.body.h2, '23453', new Date(), 'CN'];
     //增
     connection.query(addSql, addSqlParams, function (err, result) {

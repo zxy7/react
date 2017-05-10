@@ -15,6 +15,7 @@ const history = syncHistoryWithStore(hashHistory, store);
 import Index               from './pages/Index';
 import Home               from './page/Home';
 import Dairy               from './page/Dairy';
+import DairyInf               from './page/DairyInf';
 import Demeter             from './page/Demeter';
 //未匹配到路由时跳转的页面
 import NotFound            from './page/NotFound'
@@ -27,6 +28,7 @@ let routes = {
         
 		{path: 'home', component: Home},
 		{path: 'dairy', component: Dairy},
+		{path: 'DairyInf', component: DairyInf},
 		//跳转404页面
 		{path: '*', component: NotFound},
 
