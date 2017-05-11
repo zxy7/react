@@ -47,7 +47,7 @@ class Index extends Component {
 							{
 								this.state.posts ? this.state.posts.map((item, index) => {
 									return <div className="post-preview" key={index}>
-										<a href="/dairyinf" onClick={location.href="#/dairyinf"}>
+										<a onClick={()=>location.href="#/dairyinf"}>
 											<h2 className="post-title">
 												{item.h1}
 											</h2>

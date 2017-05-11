@@ -11,7 +11,7 @@ class PostItem extends Component {
 		let that = this;
 		return (
 			<div className="post-preview">
-								<a href="" onClick={location.href="#/dairyinf"}>
+								<a onClick={()=>location.href="#/dairyinf"}>
 									<h2 className="post-title">
 										下一代 Web 应用模型 —— Progressive Web App
                                      </h2>
