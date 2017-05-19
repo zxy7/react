@@ -1798,3 +1798,27 @@ li{
 .icon-active{
   color: red;
 }
+#tag_cloud a, #tag_cloud .tag {
+    font-size: 14px;
+    border: none;
+    line-height: 28px;
+    margin: 0 2px;
+    margin-bottom: 8px;
+    background: #D6D6D6;
+}
+@media only screen and (min-width: 768px){
+
+#tag_cloud {
+    margin-bottom: 25px;
+}
+#tag_cloud {
+    margin: 20px 0 15px 0;
+}
+}
+.tags {
+    margin-bottom: -5px;
+}
+.listing-seperator {
+    color: #0085a1;
+    font-size: 21px!important;
+}
