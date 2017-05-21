@@ -11,11 +11,18 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(multer({ dest: '/tmp/' }).array('image'));
 var mysql = require('mysql');
+// var connection = mysql.createConnection({
+//     host: 'localhost',
+//     user: 'root',
+//     password: '123456',
+//     database: 'test'
+// });
 var connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '123456',
-    database: 'test'
+    host: '590e82c196fda.sh.cdb.myqcloud.com',
+    user: 'cdb_outerroot',
+    password: 'root123456789',
+    port:'4727',
+    database: 'weixin'
 });
 // bodyParser.json解析json数据格式的
 app.use(bodyParser.json());

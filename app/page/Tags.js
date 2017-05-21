@@ -15,7 +15,7 @@ class Tags extends Component {
 
 		return (
 			<div id="post">
-				<header className="intro-header" style={{ backgroundImage: " url('/image/pic12.jpg')" }}>
+				<header className="intro-header" style={{ backgroundImage: " url('/image/pic07.jpg')" }}>
 					<div className="container">
 						<div className="row">
 							<div className="">
@@ -47,7 +47,7 @@ class Tags extends Component {
 						</div>
 					</div>
 				</header>
-				<div className="row">
+				<div className="row" style={{padding:'16px',maxWidth:'750px',margin:'0 auto'}}>
 					<div className="">
 
 						<div className="one-tag-list">

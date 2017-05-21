@@ -14,7 +14,7 @@
     "axios": "^0.15.3",
     "babelify": "^7.3.0",
     "base64-min": "^1.1.0",
-    "body-parser": "^1.17.1",
+    "body-parser": "^1.17.2",
     "bootstrap": "~3.1.0",
     "cropperjs": "^1.0.0-beta.2",
     "echarts": "^3.4.0",
@@ -56,6 +56,7 @@
     "wangeditor": "^2.1.23",
     "watchify": "^3.4.0",
     "webpack": "^2.2.0",
+    "webpack-dev-server": "^2.4.5",
     "whatwg-fetch": "^2.0.2"
   },
   "devDependencies": {

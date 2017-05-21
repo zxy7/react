@@ -40,7 +40,7 @@ class Index extends Component {
 						</div>
 					</div>
 				</header>
-				<div className="container" style={{ padding: '16px' }}>
+				<div className="container" style={{ padding: '16px' ,maxWidth:'750px',margin:'0 auto'}}>
 					<div className="row">
 						<div className="  col-lg-8 col-lg-offset-1		col-md-8 col-md-offset-1	col-sm-12 col-xs-12 	postlist-container  ">
 							<PostItem />
