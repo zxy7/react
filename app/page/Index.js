@@ -40,14 +40,32 @@ class Index extends Component {
 						</div>
 					</div>
 				</header>
-				<div className="container" style={{ padding: '16px' ,maxWidth:'750px',margin:'0 auto'}}>
+				<div className="container index-container" style={{ padding: '0 16px', margin: '0 auto' }}>
 					<div className="row">
-						<div className="  col-lg-8 col-lg-offset-1		col-md-8 col-md-offset-1	col-sm-12 col-xs-12 	postlist-container  ">
+						<div className="postlist-container  " style={{ maxWidth: '750px' }}>
+
 							<PostItem />
+							<hr />
+							<div className="post-preview">
+								<a onClick={() => location.href = "#/dairyinf"}>
+									<h2 className="post-title">
+										React+vs+Angular+2：冰与火之歌「译」
+                                     </h2>
+									<h3 className="post-subtitle">
+										React versus Angular 2:There Will Be Blood
+                                    </h3>
+									<div className="post-content-preview">
+									
+									 </div>
+								</a>
+								<p className="post-meta">
+									Posted by Zxy on February 5, 2017
+                                </p>
+							</div>
 							{
 								this.state.posts ? this.state.posts.map((item, index) => {
 									return <div className="post-preview" key={index}>
-										<a onClick={()=>location.href="#/dairyinf"}>
+										<a onClick={() => location.href = "#/dairyinf"}>
 											<h2 className="post-title">
 												{item.h1}
 											</h2>
@@ -75,7 +93,7 @@ class Index extends Component {
 
 							</ul>
 						</div>
-						<div className="col-lg-3 col-lg-offset-0 col-md-3 col-md-offset-0 	col-sm-12 	col-xs-12 	sidebar-container  ">
+						<div className="sidebar-container " style={{ maxWidth: '750px' }}>
 							<section>
 								<h5><a href="/tags/">FEATURED TAGS</a></h5>
 								<div className="tags">
@@ -103,7 +121,7 @@ class Index extends Component {
 							</ul>
 
 						</div>
-
+						<div style={{ clear: 'both' }}></div>
 					</div>
 				</div>
 			</div>
@@ -135,7 +153,7 @@ class Index extends Component {
 			success: function (res) {
 				console.log(res)
 				that.setState({
-					posts:res
+					posts: res
 				})
 				// if (res.success) {
 				// 	console.log('请求成功！！！', res.msg)

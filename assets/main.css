@@ -1822,3 +1822,19 @@ li{
     color: #0085a1;
     font-size: 21px!important;
 }
+@media(min-width:1200px){
+  .postlist-container,.sidebar-container{
+    float:left;
+  }
+  .sidebar-container{
+    padding:0 10px;
+  }
+  .index-container{
+   width: 1010px;
+  }
+}
+@media(min-width:750px)and (max-width:1200px){
+   .index-container{
+    width: 750px;
+  }
+}
