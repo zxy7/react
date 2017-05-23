@@ -108,7 +108,7 @@ class Dairy extends Component {
 		// 	success: (res) => {
 		// 		// if (res.success){
 		// 			console.log('请求成功！！！',res)
-					
+
 		// 		// }
 		// 		console.log(res)
 		// 	}
@@ -150,6 +150,7 @@ class Dairy extends Component {
 		let that = this;
 
 		$(function () {
+
 			var editor = new wangEditor('div1');
 			// 上传图片（举例）
 			editor.config.uploadImgUrl = '/dairy';
@@ -164,7 +165,12 @@ class Dairy extends Component {
 			editor.config.uploadHeaders = {
 				// 'Accept': 'text/x-json'
 			};
-
+			//自定义菜单配置
+			editor.config.menuConfig = [
+				['fontFamily', 'bold', 'setHead'],
+				['list', 'justify'],
+				['createLink', 'insertHr', 'undo']
+			];
 			// 隐藏掉插入网络图片功能。该配置，只有在你正确配置了图片上传功能之后才可用。
 			// editor.config.hideLinkImg = true;
 
