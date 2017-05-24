@@ -1,17 +1,17 @@
 /**
  * Created by Yi Ding on 2017/3/28.
  */
-import { CHOOSE_PRODUCTIONLOG_DETAIL } from '../actions/Index'
+import { CHOOSE_DETAIL } from '../actions/Index'
 
 const initialState = {
-    productionlogDetail: {}
+    itemDetail: {}
 };
 
 export default function wxindex(state = initialState, action) {
     switch(action.type) {
-        case CHOOSE_PRODUCTIONLOG_DETAIL: {
+        case CHOOSE_DETAIL: {
             return {
-                productionlogDetail: action.detail
+                itemDetail: action.detail
             }
         }
 

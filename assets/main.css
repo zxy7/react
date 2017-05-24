@@ -1838,3 +1838,6 @@ li{
     width: 750px;
   }
 }
+.ishidden{
+  display: none;
+}

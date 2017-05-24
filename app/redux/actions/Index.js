@@ -1,11 +1,11 @@
 /**
  * Created by Yi Ding on 2017/3/28.
  */
-export const CHOOSE_PRODUCTIONLOG_DETAIL = 'CHOOSE_PRODUCTIONLOG_DATAIL';
+export const CHOOSE_DETAIL = 'CHOOSE_DATAIL';
 
-export function selectProductionDetail(detail) {
+export function selectedItem(detail) {
     return {
-        type: CHOOSE_PRODUCTIONLOG_DETAIL,
+        type: CHOOSE_DETAIL,
         detail
     }
 }

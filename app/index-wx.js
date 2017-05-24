@@ -15,7 +15,7 @@ const history = syncHistoryWithStore(hashHistory, store);
 import Index               from './pages/Index';
 import Home               from './page/Home';
 import Dairy               from './page/Dairy';
-import DairyInf               from './page/DairyInf';
+import DairyInf               from './pages/DairyInf';
 import Demeter             from './page/Demeter';
 import Tags             from './page/Tags';
 import About             from './page/About';
@@ -30,7 +30,7 @@ let routes = {
         
 		{path: 'home', component: Home},
 		{path: 'dairy', component: Dairy},
-		{path: 'DairyInf', component: DairyInf},
+		{path: 'DairyInf(/:postid)', component: DairyInf},
 		{path: 'Tags', component: Tags},
 		{path: 'About', component: About},
 		//跳转404页面

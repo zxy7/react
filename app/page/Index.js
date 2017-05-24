@@ -55,7 +55,7 @@ class Index extends Component {
 										React versus Angular 2:There Will Be Blood
                                     </h3>
 									<div className="post-content-preview">
-									 Angular 2 已经发布 Beta 版，而且似乎很有信心在 2016 年成为热门框架。是时候进行一场巅峰对决了，我们来看看它如何与 React 这个 2015 年的新宠抗衡。 免责声明：我之前很喜欢使用 Angular 1，不过在 2015 年转到了 React。最近我也在 Pluralsight 上发布了一门关于 R...
+										Angular 2 已经发布 Beta 版，而且似乎很有信心在 2016 年成为热门框架。是时候进行一场巅峰对决了，我们来看看它如何与 React 这个 2015 年的新宠抗衡。 免责声明：我之前很喜欢使用 Angular 1，不过在 2015 年转到了 React。最近我也在 Pluralsight 上发布了一门关于 R...
 									 </div>
 								</a>
 								<p className="post-meta">
@@ -65,7 +65,10 @@ class Index extends Component {
 							{
 								this.state.posts ? this.state.posts.map((item, index) => {
 									return <div className="post-preview" key={index}>
-										<a onClick={() => location.href = "#/dairyinf"}>
+										<a onClick={() => {
+											location.href = "#/dairyinf";
+											this.props.selectedItem(item);
+										}}>
 											<h2 className="post-title">
 												{item.h1}
 											</h2>
@@ -73,7 +76,7 @@ class Index extends Component {
 												{item.h2}
 											</h3>
 											<div className="post-content-preview">
-												{item.filename}
+												{item.content}
 											</div>
 										</a>
 										<p className="post-meta">

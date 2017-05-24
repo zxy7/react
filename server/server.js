@@ -29,8 +29,27 @@ app.use(bodyParser.json());
 
 
 app.get('/getdairys', function (req, res) {
-     connection.connect();
+    connection.connect();
     var sql = 'SELECT * FROM dairys';
+    //查
+
+    connection.query(sql, function (err, result) {
+        // if (err) {
+        //     console.log('[SELECT ERROR] - ', err.message);
+        //     return;
+        // }
+        // res.send(JSON.parse(result))
+        res.send(result)
+        console.log('--------------------------SELECT----------------------------');
+        // console.log(result);
+        console.log('------------------------------------------------------------\n\n');
+    });
+
+    // connection.end();
+})
+app.get('/gettags', function (req, res) {
+    connection.connect();
+    var sql = 'SELECT * FROM tags';
     //查
 
     connection.query(sql, function (err, result) {
@@ -79,8 +98,8 @@ app.post('/savedairy', function (req, res) {
 
     console.log(req.body.h1)
 
-    var addSql = 'INSERT INTO dairys(Id,h1,h2,filename,date,tag) VALUES(0,?,?,?,?,?)';
-    var addSqlParams = [req.body.h1, req.body.h2, '23453', new Date(), 'CN'];
+    var addSql = 'INSERT INTO dairys(postid,h1,h2,content,date,tag) VALUES(0,?,?,?,?,?)';
+    var addSqlParams = [req.body.h1, req.body.h2, req.body.content, new Date(), 'CN'];
     //增
     connection.query(addSql, addSqlParams, function (err, result) {
         if (err) {
@@ -95,7 +114,11 @@ app.post('/savedairy', function (req, res) {
     });
 
     connection.end();
-
+    // 输出 JSON 格式
+    response = {
+        msg: '保存成功'
+    };
+    res.json({"msg":'保存成功'});
 
     fs.writeFile('graph.json', str_json, 'utf8', function () {
         // 保存完成后的回调函数

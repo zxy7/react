@@ -3,6 +3,7 @@
  */
 import { Component } from 'react'
 import { Link } from 'react-router'
+import { T } from '../../app/component/toast'
 class Dairy extends Component {
 	constructor(props) {
 		super(props);
@@ -58,31 +59,6 @@ class Dairy extends Component {
 					<p>请输入正文</p>
 				</div>
 
-				{
-					// <div style={{ textAlign: 'center', paddingTop: '10px' }}>
-					// 	<i className="photo icon"></i>
-					// 	<i className="header icon"></i>
-					// 	<i className="bold icon" onClick={this.bold}></i>
-					// 	<i className="paragraph icon"></i>
-					// 	<i className="unlinkify icon"></i>
-					// 	<i className="save icon" ></i>
-					// </div>
-
-					// <div className="dairy-content " id='content'
-					// 	style={{
-					// 		height: " 500px", fontSize: "14px",
-					// 		marginLeft: " auto", marginRight: " auto"
-					// 	}}>
-
-					// 	<textarea id="msg" type="text" placeholder="请输入正文"
-					// 		style={{
-					// 			width: "100%", height: " 100px", outline: " 0px", border: "none", fontSize: "14px",
-					// 			backgroundColor: "transparent", color: "rgb(0, 0, 0)", wordBreak: "break-all", paddingTop: '10px'
-					// 		}}></textarea>
-
-
-					// </div>
-				}
 			</div>
 		);
 	}
@@ -101,20 +77,6 @@ class Dairy extends Component {
 			h2: this.state.h2,
 			content:this.state.content
 		};
-		// $.ajax({
-		// 	type: "get",
-		// 	url: "/test",
-		// 	on: "now",
-		// 	xhrFields: { withCredentials: true },
-		// 	crossDomain: true,
-		// 	success: (res) => {
-		// 		// if (res.success){
-		// 			console.log('请求成功！！！',res)
-
-		// 		// }
-		// 		console.log(res)
-		// 	}
-		// })
 		$.ajax({
 			type: "post",
 			url: '/savedairy',
@@ -124,8 +86,8 @@ class Dairy extends Component {
 			crossDomain: true,
 			dataType: "json",
 			success: (res) => {
-				// T.alert(res.msg);
-				// location.href = "#/myincome/";
+				T.alert(res.msg);
+				location.href = "#/";
 			}
 		});
 		console.log(data);
@@ -133,21 +95,6 @@ class Dairy extends Component {
 
 
 	}
-	// bold() {
-	// 	$('.bold.icon').toggleClass('icon-active');
-	// 	if ($('.bold.icon').hasClass('icon-active')) {
-	// 		// console.log(113)
-	// 		// var str = '<input style="font-weight:bold" type="text" id = "num_' + this.state.num + '">';
-	// 		// $('#content').append(str);
-	// 		// $('#num_' + this.state.num).focus();
-	// 		// this.setState({
-	// 		// 	num:this.state.num++
-	// 		// })
-	// 		// console.log(1134)
-
-	// 	}
-	// }
-
 	componentDidMount() {
 		let that = this;
 		$(function () {
@@ -248,17 +195,17 @@ class Dairy extends Component {
 			// editor.enable();
 			// 初始化编辑器的内容
 			// editor.$txt.html('<p>要初始化的内容</p>');
-			$('#save').click(function () {
-				// 获取编辑器区域完整html代码
-				var html = editor.$txt.html();
+			// $('#save').click(function () {
+			// 	// 获取编辑器区域完整html代码
+			// 	var html = editor.$txt.html();
 
-				// 获取编辑器纯文本内容
-				var text = editor.$txt.text();
+			// 	// 获取编辑器纯文本内容
+			// 	var text = editor.$txt.text();
 
-				// 获取格式化后的纯文本
-				var formatText = editor.$txt.formatText();
+			// 	// 获取格式化后的纯文本
+			// 	var formatText = editor.$txt.formatText();
 
-			});
+			// });
 		});
 
 	}

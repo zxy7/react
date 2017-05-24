@@ -8,6 +8,7 @@ class Tags extends Component {
 		super(props);
 		this.state = {
 			num: 0,
+			tags:[],
 		};
 	}
 
@@ -40,6 +41,15 @@ class Tags extends Component {
 										<a href="#Android" title="Android" rel="2" style={{ backgroundColor: ' rgb(85, 158, 196)' }}>Android</a>
 										<a href="#交互设计" title="交互设计" rel="4" style={{ backgroundColor: ' rgb(85, 158, 196)' }}>交互设计</a>
 										<a href="#阿里巴巴" title="阿里巴巴" rel="3" style={{ backgroundColor: ' rgb(85, 158, 196)' }}>阿里巴巴</a>
+										{
+								this.state.tags ? this.state.tags.map((item, index) => {
+									return <a href="#知乎" title="知乎" rel={index} key={index} style={{ backgroundColor: ' rgb(85, 158, 196)' }}>
+									{item.tagname}
+									</a>
+									
+								}
+								) : ''
+							}
 									</div>
 
 								</div>
@@ -124,6 +134,22 @@ class Tags extends Component {
 	}
 	componentDidMount() {
 		let that = this;
+		$.ajax({
+			type: "get",
+			dataType: "json",
+			url: '/gettags',
+			xhrFields: { withCredentials: true },
+			crossDomain: true,
+			success: function (res) {
+				console.log(res)
+				that.setState({
+					tags: res
+				})
+				// if (res.success) {
+				// 	console.log('请求成功！！！', res.msg)
+				// }
+			}
+		})
 	}
 }
 
