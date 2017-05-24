@@ -12,6 +12,7 @@ class Dairy extends Component {
 			num: 0,
 			h1: '',
 			h2: '',
+			content: '',
 		};
 	}
 
@@ -52,7 +53,7 @@ class Dairy extends Component {
 						</div>
 					</div>
 				</header>
-				<i className="save icon" style={{ width: 40, height: 40, lineHeight: '40px' }} onClick={this.save}></i>
+				<i className="save icon" id="save" style={{ width: 40, height: 40, lineHeight: '40px' }} onClick={this.save}></i>
 				<div id="div1" style={{ width: '100%', height: '500px' }}>
 					<p>请输入正文</p>
 				</div>
@@ -98,6 +99,7 @@ class Dairy extends Component {
 		let data = {
 			h1: this.state.h1,
 			h2: this.state.h2,
+			content:this.state.content
 		};
 		// $.ajax({
 		// 	type: "get",
@@ -148,34 +150,117 @@ class Dairy extends Component {
 
 	componentDidMount() {
 		let that = this;
-
 		$(function () {
-
 			var editor = new wangEditor('div1');
 			// 上传图片（举例）
-			editor.config.uploadImgUrl = '/dairy';
-
+			editor.config.uploadImgUrl = '/upload';
+			// 可以自定义配置 xhr.withCredentials （默认为 true）
+			// editor.config.withCredentials = false;
 			// 配置自定义参数（举例）
 			editor.config.uploadParams = {
 				// token: 'abcdefg',
 				// user: 'wangfupeng1988'
 			};
-
 			// 设置 headers（举例）
 			editor.config.uploadHeaders = {
 				// 'Accept': 'text/x-json'
 			};
-			//自定义菜单配置
-			editor.config.menuConfig = [
-				['fontFamily', 'bold', 'setHead'],
-				['list', 'justify'],
-				['createLink', 'insertHr', 'undo']
+			// 普通的自定义菜单
+			editor.config.menus = [
+				'source',
+				'|',
+				'bold',
+				'underline',
+				'italic',
+				'strikethrough',
+				'eraser',
+				'forecolor',
+				'bgcolor',
+				'|',
+				'quote',
+				'fontfamily',
+				'fontsize',
+				'head',
+				'unorderlist',
+				'orderlist',
+				'alignleft',
+				'aligncenter',
+				'alignright',
+				'|',
+				'link',
+				'unlink',
+				'table',
+				'emotion',
+				'|',
+				'img',
+				'location',
+				'insertcode',
+				'|',
+				'undo',
+				'redo',
+				'fullscreen'
 			];
+			// 配置自定义表情，在 create() 之前配置
+			editor.config.emotions = {
+				// 支持多组表情
+
+				// 第一组，id叫做 'default' 
+				'default': {
+					title: '默认',  // 组名称
+					data: './emotions.data'  // 服务器的一个json文件url，例如官网这里配置的是 http://www.wangeditor.com/wangEditor/test/emotions.data
+				},
+				// 第二组，id叫做'weibo'
+				'weibo': {
+					title: '微博表情',  // 组名称
+					data: [  // data 还可以直接赋值为一个表情包数组
+						// 第一个表情
+						{
+							'icon': 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/7a/shenshou_thumb.gif',
+							'value': '[草泥马]'
+						},
+						// 第二个表情
+						{
+							'icon': 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/60/horse2_thumb.gif',
+							'value': '[神马]'
+						}
+						// 下面还可以继续，第三个、第四个、第N个表情。。。
+					]
+				}
+				// 下面还可以继续，第三组、第四组、、、
+			};
+
 			// 隐藏掉插入网络图片功能。该配置，只有在你正确配置了图片上传功能之后才可用。
 			// editor.config.hideLinkImg = true;
+			// 配置 onchange 事件
+			editor.onchange = function () {
+				// 编辑区域内容变化时，实时打印出当前内容
+				console.log(this.$txt.html());
+				that.setState({
+					content:this.$txt.html()
+				})
+			};
 
 			editor.create();
+
+			// // 禁用
+			// editor.disable();
+			// // 启用
+			// editor.enable();
+			// 初始化编辑器的内容
+			// editor.$txt.html('<p>要初始化的内容</p>');
+			$('#save').click(function () {
+				// 获取编辑器区域完整html代码
+				var html = editor.$txt.html();
+
+				// 获取编辑器纯文本内容
+				var text = editor.$txt.text();
+
+				// 获取格式化后的纯文本
+				var formatText = editor.$txt.formatText();
+
+			});
 		});
+
 	}
 }
 

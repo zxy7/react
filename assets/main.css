@@ -22,7 +22,7 @@ body,
 body .ui,
 body *:not(i) {
 	font-family: Lato, LTH, 'Helvetica Neue', 'Helvetica,STHeiTi', 'Microsoft YaHei UI Light', 'Microsoft YaHei', sans-serif !important;
-	font-weight: normal;
+	/*font-weight: normal;*/
 }
 
 .touch-scroll-wrapper {

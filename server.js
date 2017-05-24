@@ -15,9 +15,8 @@ var uploadfoldername = 'uploadfiles';
 var uploadfolderpath = path.join(__dirname, uploadfoldername);
 
 // var server = '192.168.1.5';
-// var server = '172.22.145.3';
 var server = 'localhost';
-var port = 3000;
+var port = 3001;
 
 // var connection = mysql.createConnection({
 // 	host: 'localhost',
@@ -38,8 +37,8 @@ http.createServer(function (req, res) {
 	console.log('路由 ' + req.url);
 
 	// ----------------------用 '/upload' 这个路由来处理文件上传----------------------
-	if (req.url === '/dairy' && req.method.toLowerCase() === 'post') {
-		console.log('定位到 /dairy 路由');
+	if (req.url === '/upload' && req.method.toLowerCase() === 'post') {
+		console.log('定位到 /upload 路由');
 
 		// 使用第三方的 formidable 插件初始化一个 form 对象
 		var form = new formidable.IncomingForm();
@@ -91,6 +90,7 @@ http.createServer(function (req, res) {
 				// 构建将要存储的文件的路径
 				var filenewpath = path.join(uploadfolderpath, filename);
 
+        console.log(filename);
 				// 将临时文件保存为正式的文件
 				fs.rename(tempfilepath, filenewpath, function (err) {
 					// 存储结果
