@@ -75,7 +75,8 @@ class Dairy extends Component {
 		let data = {
 			h1: this.state.h1,
 			h2: this.state.h2,
-			content:this.state.content
+			content:this.state.content,
+			tags:'ss,rr'
 		};
 		$.ajax({
 			type: "post",
@@ -87,7 +88,7 @@ class Dairy extends Component {
 			dataType: "json",
 			success: (res) => {
 				T.alert(res.msg);
-				location.href = "#/";
+				// location.href = "#/";
 			}
 		});
 		console.log(data);

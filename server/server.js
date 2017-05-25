@@ -95,38 +95,78 @@ app.post('/savedairy', function (req, res) {
 
 
     connection.connect();
-
-    console.log(req.body.h1)
-
-    var addSql = 'INSERT INTO dairys(postid,h1,h2,content,date,tag) VALUES(0,?,?,?,?,?)';
-    var addSqlParams = [req.body.h1, req.body.h2, req.body.content, new Date(), 'CN'];
+    var addSql = 'INSERT INTO dairys(postid,h1,h2,content,date,tags) VALUES(0,?,?,?,?,?)';
+    var addSqlParams = [req.body.h1, req.body.h2, req.body.content, new Date(), req.body.tags];
     //增
-    connection.query(addSql, addSqlParams, function (err, result) {
+    connection.query(addSql, addSqlParams, function (err, dairy_result) {
         if (err) {
             console.log('[INSERT ERROR] - ', err.message);
             return;
         }
-
         console.log('--------------------------INSERT----------------------------');
-        //console.log('INSERT ID:',result.insertId);        
-        console.log('INSERT ID:', result);
+        console.log('INSERT ID:', dairy_result.insertId);
         console.log('-----------------------------------------------------------------\n\n');
-    });
+        var addSql_tags = 'INSERT INTO tags(tagid,tagname) VALUES(0,?)';
+        var addSqlParams_tags = req.body.tags.split(',');
+        // var addSqlParams_tags = ['a', 'haha', 'v', 'c'];
+        console.log(addSqlParams_tags)
 
-    connection.end();
-    // 输出 JSON 格式
-    response = {
-        msg: '保存成功'
-    };
-    res.json({"msg":'保存成功'});
+        console.log(addSqlParams_tags[1])
+        //增
+        for (var i = 0; i < addSqlParams_tags.length; i++) {
+            (function (i) {
+                connection.query('SELECT * FROM tags where tagname="' + addSqlParams_tags[i] + '"', function (err, result) {
+                    if (err) {
+                        console.log('[INSERT ERROR] - ', err.message);
+                        return;
+                    }
+                    if (result.length == 1) {
+                        console.log(result[0].tagid);
+                        //插入中间表
+                        var sqldata = [result[0].tagid, result[0].tagname, dairy_result.insertId, req.body.h1, req.body.h2];
+                        connection.query('INSERT INTO class(id,tagid,tagname,postid,h1,h2) VALUES(0,?,?,?,?,?)', sqldata, function (err, result) {
+                            if (err) {
+                                console.log('[SELECT ERROR] - ', err.message);
+                                return;
+                            }
+                            console.log('保存class表成功');
+                        });
+                    }
+                    else {
+                        // console.log(addSqlParams_tags, i)
+                        // console.log("fffffffffffffffffffffffff" + addSqlParams_tags[i])
+                        connection.query(addSql_tags, [addSqlParams_tags[i]], function (err, result) {
+                            if (err) {
+                                console.log('[INSERT ERROR] - ', err.message);
+                                return;
+                            }
+                            console.log('保存tags表成功')
+                            var sqldata = [result.insertId, addSqlParams_tags[i], dairy_result.insertId, req.body.h1, req.body.h2];
+                            connection.query('INSERT INTO class(id,tagid,tagname,postid,h1,h2) VALUES(0,?,?,?,?,?)', sqldata, function (err, result) {
+                                if (err) {
+                                    console.log('[SELECT ERROR] - ', err.message);
+                                    return;
+                                }
+                                console.log('保存class表成功');
+                            });
+                        });
+                    }
+
+                });
+            })(i)
+        }
+    })
+    // connection.end();
+
+
+    res.json({ "msg": '保存成功' });
 
     fs.writeFile('graph.json', str_json, 'utf8', function () {
         // 保存完成后的回调函数
-        console.log("保存完成");
+        console.log("保存到graph.json");
     });
 
 })
-
 var server = app.listen(3001, function () {
 
     var host = server.address().address
