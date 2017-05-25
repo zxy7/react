@@ -14,7 +14,7 @@ class Index extends Component {
 		this.state = {
 			count: 0,
 			posts: [],
-			// posts: [{ "id": 1, "h1": "大标题", "h2": "小标题", "filename": "规划好好纠结军军军军军或或过过过过", "date": "2017-05-08T07:32:22.000Z", "tag": "today" }, { "id": 2, "h1": "hahahah", "h2": "小标题", "filename": "规划好好纠结军军军军军或或过过过过", "date": "2017-05-02T07:32:22.000Z", "tag": "hh" }, { "id": 3, "h1": "淘宝", "h2": "ht", "filename": "13", "date": "2017-05-03T07:43:54.000Z", "tag": "77" }, { "id": 4, "h1": "看看", "h2": "看看", "filename": "可口可乐", "date": "2017-05-11T07:44:50.000Z", "tag": "923" }, { "id": 5, "h1": "d s", "h2": "d ", "filename": "d ", "date": "2017-05-07T07:45:13.000Z", "tag": "淘宝" }, { "id": 6, "h1": "bigtitle", "h2": "smalltitle", "filename": "23453", "date": "2017-05-08T07:32:22.000Z", "tag": "CN" }, { "id": 7, "h1": "上看看", "h2": "就几节课", "filename": "23453", "date": "2017-05-08T07:32:22.000Z", "tag": "CN" }, { "id": 16, "h1": "", "h2": "", "filename": "23453", "date": "2017-05-10T06:56:07.000Z", "tag": "CN" }],
+			tags: [],
 
 		};
 	}
@@ -62,6 +62,7 @@ class Index extends Component {
 									Posted by Zxy on February 5, 2016
                                 </p>
 							</div>
+							<hr />
 							{
 								this.state.posts ? this.state.posts.map((item, index) => {
 									return <div className="post-preview" key={index}>
@@ -76,7 +77,9 @@ class Index extends Component {
 												{item.h2}
 											</h3>
 											<div className="post-content-preview">
-												{item.content}
+												{
+													$(item.content).text()
+												}
 											</div>
 										</a>
 										<p className="post-meta">
@@ -90,7 +93,6 @@ class Index extends Component {
 							}
 
 
-							<hr />
 							<ul className="pager">
 								<li className="next">
 									<a href="/page2" className="right">Older Posts →</a>
@@ -102,11 +104,16 @@ class Index extends Component {
 							<section>
 								<h5><a href="/tags/">FEATURED TAGS</a></h5>
 								<div className="tags">
+									{
+										this.state.tags ? this.state.tags.map((item, index) => {
+											return <a href={"#tags/" + item.tagname} title={item.tagname} rel={index} key={index} >
+												{item.tagname}
+											</a>
+										}
+										) : ''
+									}
 									<a href="/tags/#知乎" title="知乎" rel="7">
 										知乎
-                                </a>
-									<a href="/tags/#Android" title="Android" rel="2">
-										Android
                                 </a>
 								</div>
 							</section>
@@ -158,14 +165,11 @@ class Index extends Component {
 			success: function (res) {
 				console.log(res)
 				that.setState({
-					posts: res
+					posts: res.posts,
+					tags: res.tags,
 				})
-				// if (res.success) {
-				// 	console.log('请求成功！！！', res.msg)
-				// }
 			}
 		})
-
 	}
 }
 

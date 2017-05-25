@@ -27,6 +27,21 @@ var connection = mysql.createConnection({
 // bodyParser.json解析json数据格式的
 app.use(bodyParser.json());
 
+app.get('/getdairy/:postid', function (req, res) {
+    connection.connect();
+    console.log(req.params.postid);
+    var sql = 'SELECT * FROM dairys WHERE postid="' + req.params.postid + '"';
+    // var sql = 'SELECT * FROM dairys WHERE postid="54"';
+    //查
+    connection.query(sql, function (err, result) {
+        if (err) {
+            console.log('[SELECT ERROR] - ', err.message);
+            return;
+        }
+        res.send(result)
+    });
+    connection.end();
+})
 
 app.get('/getdairys', function (req, res) {
     connection.connect();
@@ -39,7 +54,10 @@ app.get('/getdairys', function (req, res) {
             return;
         }
         // res.send(JSON.parse(result))
-        res.send(result)
+        connection.query('SELECT * FROM tags', function (err, tag_result) {
+            var response = { posts: result, tags: tag_result };
+            res.send(response)
+        });
         console.log('--------------------------SELECT----------------------------');
         // console.log(result);
         console.log('------------------------------------------------------------\n\n');
@@ -59,7 +77,7 @@ app.get('/gettags', function (req, res) {
         // }
         // res.send(JSON.parse(result))
         connection.query('SELECT * FROM class', function (err, class_result) {
-            var response={tags:result,classList:class_result};
+            var response = { tags: result, classList: class_result };
             res.send(response)
         });
         console.log('--------------------------SELECT----------------------------');

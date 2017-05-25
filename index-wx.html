@@ -24,7 +24,16 @@
   <script type="text/javascript" src="node_modules/wangeditor/dist/js/wangEditor.min.js"></script>
   <!--<script src="assets/bundle.wx.min.js"></script>-->
   <script type="text/javascript">
-
+    // $('#huxblog_navbar li:nth-child(2)').css('display', 'none')
+    if (window.location.hash.split("/")[2] == 'zxy') {
+      $('i.ishidden').removeClass('ishidden');
+      $('#huxblog_navbar li:nth-child(2)').css('display', 'inline-block')
+      // 启用
+      editor.enable();
+    } else {
+      $('#huxblog_navbar li:nth-child(2)').css('display', 'none')
+      $('i.ishidden').css('display', 'none')
+    }
   </script>
 
 </body>

@@ -58,15 +58,15 @@ class DairyInf extends Component {
 		$.ajax({
 			type: "get",
 			dataType: "json",
-			url: '/getdairys',
+			url: '/getdairy/' + window.location.hash.split("/")[2],
 			xhrFields: { withCredentials: true },
 			crossDomain: true,
 			success: function (res) {
-				console.log( res.filter((ob)=>{return ob.postid==window.location.hash.split("/")[2]}))
+				// console.log( res.posts.filter((ob)=>{return ob.postid==window.location.hash.split("/")[2]}))
 				that.setState({
-					h1: res.filter((ob)=>{return ob.postid==window.location.hash.split("/")[2]})[0].h1,
-					h2: res.filter((ob)=>{return ob.postid==window.location.hash.split("/")[2]	})[0].h2,
-					content: res.filter((ob)=>{return ob.postid==window.location.hash.split("/")[2]})[0].content,
+					h1: res[0].h1,
+					h2: res[0].h2,
+					content: res[0].content,
 				})
 			}
 		})
@@ -158,13 +158,16 @@ class DairyInf extends Component {
 			// 禁用
 			editor.disable();
 			editor.$txt.html(that.state.content);
-
-
+			$('.wangEditor-menu-container.clearfix').addClass('ishidden')
 			if (window.location.hash.split("/")[3] == 'zxy') {
-				$('.ishidden').removeClass('ishidden');
+				$('i.ishidden').removeClass('ishidden');
+				$('.wangEditor-menu-container.clearfix.ishidden').removeClass('ishidden');
+				$('#huxblog_navbar li:nth-child(2)').css('display', 'inline-block')
 				// 启用
 				editor.enable();
 			}
+
+
 		});
 
 	}

@@ -31,8 +31,8 @@ let routes = {
 		{path: 'home', component: Home},
 		{path: 'dairy', component: Dairy},
 		{path: 'DairyInf(/:postid)(/:admin)', component: DairyInf},
-		{path: 'Tags', component: Tags},
-		{path: 'About', component: About},
+		{path: 'Tags(/:tagname)', component: Tags},
+		{path: 'About(/:tagname)', component: About},
 		//跳转404页面
 		{path: '*', component: NotFound},
 

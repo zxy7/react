@@ -42,7 +42,7 @@ class Tags extends Component {
 										<a href="#阿里巴巴" title="阿里巴巴" rel="3" style={{ backgroundColor: ' rgb(85, 158, 196)' }}>阿里巴巴</a>
 										{
 											this.state.tags ? this.state.tags.map((item, index) => {
-												return <a href="#知乎" title="知乎" rel={index} key={index} style={{ backgroundColor: ' rgb(85, 158, 196)' }}>
+												return <a href={"#tags/"+item.tagname} title={item.tagname} rel={index} key={index} style={{ backgroundColor: ' rgb(85, 158, 196)' }}>
 													{item.tagname}
 												</a>
 											}
@@ -60,7 +60,7 @@ class Tags extends Component {
 						{
 							this.state.tags ? this.state.tags.map((item, index) => {
 								return <div className="one-tag-list" key={index}>
-									<span className=" listing-seperator" id={item.tagname}>
+									<span className=" listing-seperator" id={"tags/"+item.tagname}>
 										<i className="tag icon"></i>
 										<span className="tag-text">{item.tagname}</span>
 									</span>
