@@ -15,7 +15,7 @@ class Footer extends Component {
                         <div className="" style={{ textAlign: 'center' }}>
                             <ul className="list-inline">
                                 <li>
-                                    <a target="_blank" href="https://www.zhihu.com/people/huxpro">
+                                    <a target="_blank" href="http://www.zhihu.com/people/zzz-49-4-35/activities">
                                         <span className="fa-stack fa-lg">
                                             <i className="fa fa-circle fa-stack-2x"></i>
                                             <i className="fa  fa-stack-1x fa-inverse">知</i>
@@ -23,7 +23,7 @@ class Footer extends Component {
                                     </a>
                                 </li>
                                 <li>
-                                    <a target="_blank" href="http://weibo.com/huxpro">
+                                    <a target="_blank" href="http://weibo.com/u/5048920080">
                                         <span className="fa-stack fa-lg">
                                             <i className="fa fa-circle fa-stack-2x"></i>
                                             <i className="fa fa-weibo fa-stack-1x fa-inverse"></i>
@@ -31,7 +31,7 @@ class Footer extends Component {
                                     </a>
                                 </li>
                                 <li>
-                                    <a target="_blank" href="https://www.facebook.com/huxpro">
+                                    <a target="_blank" href="https://www.facebook.com/zxy7">
                                         <span className="fa-stack fa-lg">
                                             <i className="fa fa-circle fa-stack-2x"></i>
                                             <i className="fa fa-facebook fa-stack-1x fa-inverse"></i>
@@ -39,7 +39,7 @@ class Footer extends Component {
                                     </a>
                                 </li>
                                 <li>
-                                    <a target="_blank" href="https://github.com/huxpro">
+                                    <a target="_blank" href="https://github.com/zxy7">
                                         <span className="fa-stack fa-lg">
                                             <i className="fa fa-circle fa-stack-2x"></i>
                                             <i className="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -50,7 +50,7 @@ class Footer extends Component {
                             <p className="copyright">
                                 Copyright &copy;Zxy Blog 2017
                     <br />
-                                Theme by <a href="http://huangxuan.me">Zxy</a> |
+                                Theme by <a href="https://github.com/zxy7">Zxy</a> |
                    {
                                     //    <iframe
                                     //             style={{marginLeft: "2px", marginBottom:"-5px"}}

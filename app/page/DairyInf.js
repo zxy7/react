@@ -25,8 +25,8 @@ class DairyInf extends Component {
 							<div className="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
 								<div className="site-heading" style={{ textAlign: 'left', paddingLeft: '10px' }}>
 									<div className="tags">
-										<a className="tag" href="/tags/#前端开发" title="前端开发">前端开发</a>
-										<a className="tag" href="/tags/#JavaScript" title="JavaScript">JavaScript</a>
+										<a className="tag" href="#tags/前端开发" title="前端开发">前端开发</a>
+										<a className="tag" href="#tags/JavaScript" title="JavaScript">JavaScript</a>
 									</div>
 									<h1 style={{ width: '100%', fontSize: '30px', color: 'white' }}>
 										{this.state.h1}
@@ -49,7 +49,7 @@ class DairyInf extends Component {
 				<div id="div2" style={{ width: '100%', height: '500px' }}>
 					<p>请输入正文</p>
 				</div>
-
+				<div id="uyan_frame"></div>
 			</div>
 		);
 	}
@@ -160,7 +160,7 @@ class DairyInf extends Component {
 			editor.$txt.html(that.state.content);
 			$('.wangEditor-menu-container.clearfix').addClass('ishidden')
 			if (window.location.hash.split("/")[3] == 'zxy') {
-				$('i.ishidden').removeClass('ishidden');
+				$('i.ishidden').css('display', 'inline-block')
 				$('.wangEditor-menu-container.clearfix.ishidden').removeClass('ishidden');
 				$('#huxblog_navbar li:nth-child(2)').css('display', 'inline-block')
 				// 启用

@@ -112,7 +112,7 @@ class Index extends Component {
 										}
 										) : ''
 									}
-									<a href="/tags/#知乎" title="知乎" rel="7">
+									<a href="#tags/知乎" title="知乎" rel="7">
 										知乎
                                 </a>
 								</div>

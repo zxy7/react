@@ -37,9 +37,9 @@ class Tags extends Component {
 										</div>
 									</span>
 									<div id="tag_cloud" className="tags">
-										<a href="#知乎" title="知乎" rel="7" style={{ backgroundColor: ' rgb(85, 158, 196)' }}>知乎</a>
-										<a href="#Android" title="Android" rel="2" style={{ backgroundColor: ' rgb(85, 158, 196)' }}>Android</a>
-										<a href="#阿里巴巴" title="阿里巴巴" rel="3" style={{ backgroundColor: ' rgb(85, 158, 196)' }}>阿里巴巴</a>
+										<a href="#tags/知乎" title="知乎" rel="7" style={{ backgroundColor: ' rgb(85, 158, 196)' }}>知乎</a>
+										<a href="#tags/Android" title="Android" rel="2" style={{ backgroundColor: ' rgb(85, 158, 196)' }}>Android</a>
+										<a href="#tags/阿里巴巴" title="阿里巴巴" rel="3" style={{ backgroundColor: ' rgb(85, 158, 196)' }}>阿里巴巴</a>
 										{
 											this.state.tags ? this.state.tags.map((item, index) => {
 												return <a href={"#tags/"+item.tagname} title={item.tagname} rel={index} key={index} style={{ backgroundColor: ' rgb(85, 158, 196)' }}>
