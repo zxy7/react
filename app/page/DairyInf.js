@@ -10,8 +10,8 @@ class DairyInf extends Component {
 			num: 0,
 			h1: this.props.wxindex.itemDetail.h1,
 			h2: this.props.wxindex.itemDetail.h1,
-			content:this.props.wxindex.itemDetail.content,
-			autor:'Posted by Hux on February 9, 2017',
+			content: this.props.wxindex.itemDetail.content,
+			autor: 'Posted by Hux on February 9, 2017',
 		};
 	}
 
@@ -23,7 +23,7 @@ class DairyInf extends Component {
 					<div className="container">
 						<div className="row">
 							<div className="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
-								<div className="site-heading" style={{ textAlign: 'left',paddingLeft:'10px'}}>
+								<div className="site-heading" style={{ textAlign: 'left', paddingLeft: '10px' }}>
 									<div className="tags">
 										<a className="tag" href="/tags/#前端开发" title="前端开发">前端开发</a>
 										<a className="tag" href="/tags/#JavaScript" title="JavaScript">JavaScript</a>
@@ -45,7 +45,7 @@ class DairyInf extends Component {
 						</div>
 					</div>
 				</header>
-				<i className="save icon ishidden" id="save" style={{ width: 40, height: 40, lineHeight: '40px'}} onClick={this.save}></i>
+				<i className="save icon ishidden" id="save" style={{ width: 40, height: 40, lineHeight: '40px' }} onClick={this.save}></i>
 				<div id="div2" style={{ width: '100%', height: '500px' }}>
 					<p>请输入正文</p>
 				</div>
@@ -55,7 +55,21 @@ class DairyInf extends Component {
 	}
 	componentDidMount() {
 		let that = this;
-		
+		$.ajax({
+			type: "get",
+			dataType: "json",
+			url: '/getdairys',
+			xhrFields: { withCredentials: true },
+			crossDomain: true,
+			success: function (res) {
+				console.log( res.filter((ob)=>{return ob.postid==window.location.hash.split("/")[2]}))
+				that.setState({
+					h1: res.filter((ob)=>{return ob.postid==window.location.hash.split("/")[2]})[0].h1,
+					h2: res.filter((ob)=>{return ob.postid==window.location.hash.split("/")[2]	})[0].h2,
+					content: res.filter((ob)=>{return ob.postid==window.location.hash.split("/")[2]})[0].content,
+				})
+			}
+		})
 
 		$(function () {
 			var editor = new wangEditor('div2');
@@ -135,7 +149,7 @@ class DairyInf extends Component {
 				// 编辑区域内容变化时，实时打印出当前内容
 				console.log(this.$txt.html());
 				that.setState({
-					content:this.$txt.html()
+					content: this.$txt.html()
 				})
 			};
 
@@ -145,12 +159,12 @@ class DairyInf extends Component {
 			editor.disable();
 			editor.$txt.html(that.state.content);
 
-			
-			if(window.location.hash.split("/")[2]=='zxy'){
-			$('.ishidden').removeClass('ishidden');
-			// 启用
-			editor.enable();
-		}
+
+			if (window.location.hash.split("/")[3] == 'zxy') {
+				$('.ishidden').removeClass('ishidden');
+				// 启用
+				editor.enable();
+			}
 		});
 
 	}

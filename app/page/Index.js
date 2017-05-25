@@ -82,6 +82,8 @@ class Index extends Component {
 										<p className="post-meta">
 											Posted by Zxy on {item.date}
 										</p>
+
+										<hr />
 									</div>
 								}
 								) : ''

@@ -30,7 +30,7 @@ let routes = {
         
 		{path: 'home', component: Home},
 		{path: 'dairy', component: Dairy},
-		{path: 'DairyInf(/:postid)', component: DairyInf},
+		{path: 'DairyInf(/:postid)(/:admin)', component: DairyInf},
 		{path: 'Tags', component: Tags},
 		{path: 'About', component: About},
 		//跳转404页面

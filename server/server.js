@@ -34,10 +34,10 @@ app.get('/getdairys', function (req, res) {
     //查
 
     connection.query(sql, function (err, result) {
-        // if (err) {
-        //     console.log('[SELECT ERROR] - ', err.message);
-        //     return;
-        // }
+        if (err) {
+            console.log('[SELECT ERROR] - ', err.message);
+            return;
+        }
         // res.send(JSON.parse(result))
         res.send(result)
         console.log('--------------------------SELECT----------------------------');
@@ -58,7 +58,10 @@ app.get('/gettags', function (req, res) {
         //     return;
         // }
         // res.send(JSON.parse(result))
-        res.send(result)
+        connection.query('SELECT * FROM class', function (err, class_result) {
+            var response={tags:result,classList:class_result};
+            res.send(response)
+        });
         console.log('--------------------------SELECT----------------------------');
         // console.log(result);
         console.log('------------------------------------------------------------\n\n');
