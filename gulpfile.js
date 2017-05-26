@@ -18,11 +18,14 @@ var rename = require('gulp-rename');
 var concat = require('gulp-concat');
 
 var cssSrc = [
-	'node_modules/semantic-ui/dist/semantic.min.css',
-	'node_modules/react-datepicker/dist/react-datepicker.css',
-	'node_modules/react-day-picker/lib/style.css',
-	'node_modules/jquery-file-upload/css/uploadfile.css',
-	'assets/main.css'
+	'assets/semantic.min.css',
+	// 'node_modules/react-datepicker/dist/react-datepicker.css',
+	// 'node_modules/react-day-picker/lib/style.css',
+	// 'node_modules/jquery-file-upload/css/uploadfile.css',
+	'assets/main.css',
+	'node_modules/wangeditor/dist/css/wangEditor.min.css',
+	'assets/css/font-awesome.min.css',
+	'assets/toast.css'
 ];
 
 var b_wx = browserify({

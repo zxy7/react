@@ -17,7 +17,7 @@ class Tags extends Component {
 
 		return (
 			<div id="post">
-				<header className="intro-header" style={{ backgroundImage: " url('/image/pic07.jpg')" }}>
+				<header className="intro-header" style={{ backgroundImage: " url('image/pic07.jpg')" }}>
 					<div className="container">
 						<div className="row">
 							<div className="">

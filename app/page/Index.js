@@ -28,7 +28,7 @@ class Index extends Component {
 
 		return (
 			<div>
-				<header className="intro-header" style={{ backgroundImage: " url('/image/pic06.jpg')" }}>
+				<header className="intro-header" style={{ backgroundImage: " url('image/pic06.jpg')" }}>
 					<div className="container">
 						<div className="row">
 							<div className="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
