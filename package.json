@@ -24,7 +24,7 @@
     "immutable": "^3.8.1",
     "iscroll": "^5.2.0",
     "isomorphic-fetch": "^2.2.1",
-    "jquery": "^2.1.4",
+    "jquery": "^3.0.0",
     "jquery-easing": "0.0.1",
     "jquery-file-upload": "^4.0.5",
     "jquery-lazyload": "^1.9.7",
